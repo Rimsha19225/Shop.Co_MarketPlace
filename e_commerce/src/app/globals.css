@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Integral CF';
+    src: url('/fonts/Fontspring-DEMO-integralcf-regular.woff2') format('woff2'),
+         url('/fonts/Fontspring-DEMO-integralcf-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Integral CF';
+    src: url('/fonts/Fontspring-DEMO-integralcf-bold.woff2') format('woff2'),
+         url('/fonts/Fontspring-DEMO-integralcf-bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('/fonts/Satoshi-Regular.woff') format('woff2'),
+         url('/fonts/Satoshi-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Satoshi1';
+    src: url('/fonts/Satoshi-Bold.woff2') format('woff2'),
+         url('/fonts/Satoshi-Bold.woff2') format('woff');
+    font-weight: bold;
+    font-style: bold;
+  }
+  
+  .integral {
+    font-family: 'Integral CF', sans-serif;
+  }
+
+  .satoshi {
+    font-family: 'Satoshi', sans-serif;
+  }
+
+  .satoshi1 {
+    font-family: 'Satoshi1', sans-serif;
+  }
+
+/* .header{
+    font-family: Satoshi, serif;
+}
+
+.home{
+    font-family: Integral CF, serif;
+} */
+
+.link:hover{
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.logo{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: -1px -1px 4px #ffffff;
+    background: linear-gradient(to right, rgba(251, 249, 249, 0.5), #fbfafa, #fafafa, rgba(243, 241, 241, 0.5));
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.shake{
+    transition: transform 0.1s;
+}
+
+.shake:hover{
+    animation: shake 0.9s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+    75% { transform: translateX(-2px); }
+  }
+
+.card{
+    transition: transform 0.3s ease-out, color 0.3s ease-out;
+}
+
+.card:hover{
+    transform: scale(1.05);
+}
+
+
+/* @media (min-width: 768px) and (max-width: 1024px){
+  
+} */
