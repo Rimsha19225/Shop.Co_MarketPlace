@@ -68,4 +68,3 @@ const CustomerReviewSlider = () => {
 };
 
 export default CustomerReviewSlider;
-

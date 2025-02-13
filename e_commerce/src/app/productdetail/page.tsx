@@ -10,10 +10,10 @@ import m1 from '../../../public/images/fourrr.png'
 import m2 from '../../../public/images/m2.png'
 import m3 from '../../../public/images/m3.png'
 import m4 from '../../../public/images/fiveee.png'
-import Footer from "@/components/footer"
 import Link from "next/link"
 import ViewReview from "@/components/viewReview"
 import CountReview from "@/components/countReview"
+import ProductPage from "../product/[slug]/page"
 // import ProductList from "@/components/productList"
 
 const Cart = () => {
@@ -37,7 +37,7 @@ const Cart = () => {
                 <p className="font-[400] cursor-pointer ml-[-2px] text-[16px] leading-[21.6px] text-[#000000]">T-shirts</p>
             </div>
         </div>
-        ~~~~
+        <ProductPage/>
         <div className="mt-[60px]">
             <div className="satoshi flex pb-[20px] justify-around border-b-[1px] mb-[30px]">
                 <h3 className="text-[20px] cursor-pointer text-[#00000099] leading-[22px] font-[400] hover:text-[#000000]">Product Details</h3>
@@ -117,7 +117,6 @@ const Cart = () => {
         </div>
       </div>
     </div>
-    <Footer/>
     </div>
   )
 }

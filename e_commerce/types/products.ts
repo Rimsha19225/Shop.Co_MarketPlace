@@ -21,6 +21,7 @@ export interface Product {
     discountedPrice : number;
     colors : string[];
     sizes : string[];
+    inventory: number;
 }
 
 

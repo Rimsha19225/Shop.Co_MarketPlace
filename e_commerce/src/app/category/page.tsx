@@ -15,13 +15,12 @@ import purple from "../../../public/images/purple.png"
 import pink from "../../../public/images/pink.png"
 import white from "../../../public/images/white.png"
 import black from "../../../public/images/black.png" 
-import Footer from "@/components/footer"
 
 
 const Categories = () => {
   return (
     <div>
-        <div className="mt-[180px] w-[85%] m-auto mb-[10rem]">
+        <div className="mt-[150px] w-[85%] m-auto mb-[10rem]">
             <div className="flex mb-[40px] gap-5 items-center">
                 <div className="flex items-center gap-2">
                     <Link href={"/"}><p className="font-[400] cursor-pointer text-[16px] hover:text-[#000000] leading-[21.6px] text-[#00000099]">Home</p></Link>
@@ -135,7 +134,6 @@ const Categories = () => {
                 </div>
             </div>
         </div>
-        <Footer />
     </div>
   )
 }

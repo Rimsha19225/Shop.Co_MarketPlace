@@ -6,7 +6,9 @@ import { allProducts } from "@/sanity/lib/queries";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
-import Link  from 'next/link';
+import Link from "next/link";
+import { addToCart } from "@/app/actions/actions";
+import Swal from "sweetalert2";
 
 const ShopProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -35,6 +37,18 @@ const ShopProduct = () => {
     }
     fetchProducts();
   }, []);
+
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+    e.preventDefault(); // Prevent unintended navigation
+    Swal.fire({
+      position: "center",
+      icon : "success",
+      title : `${product.name} added to cart`,
+      showConfirmButton : false,
+      timer : 1000
+    })
+    addToCart(product);
+  };
 
   const totalPages = Math.ceil(products.length / productsPerPage);
   const startIndex = (currentPage - 1) * productsPerPage;
@@ -75,6 +89,7 @@ const ShopProduct = () => {
               />
             )}
             <h2 className="satoshi1 text-lg font-bold mt-4">{product.name}</h2>
+            </Link>
             {renderStars(product.rating)}
             <div className="mt-2">
               {product.discountPercent > 0 ? (
@@ -89,7 +104,9 @@ const ShopProduct = () => {
                 <p className="satoshi1 text-gray-800 text-[1.2rem]">${product.price}</p>
               )}
             </div>
-            </Link>
+            <div className="mt-4">
+              <button className="bg-gradient-to-r from-black to-gray-300 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg hover:scale-110 transition-transform duration-200 ease-in-out" onClick={(e) => handleAddToCart(e, product)}>Add To Cart</button>
+            </div>
           </div>
         ))}
       </div>
@@ -105,15 +122,19 @@ const ShopProduct = () => {
           >
             Previous
           </button>
-          {Array.from({ length: totalPages }).map((_, i) => (
+          {Array.from({ length: totalPages }, (_, i) => (
             <button
-              key={i}
+              key={i + 1}
               onClick={() => setCurrentPage(i + 1)}
-              className={`px-4 py-2 rounded-lg ${currentPage === i + 1 ? "bg-black text-white" : "border hover:bg-gray-200"}`}
+              className={`px-4 py-2 rounded-lg ${
+                currentPage === i + 1 ? "bg-black text-white" : "border hover:bg-gray-200"
+              }`}
             >
               {i + 1}
             </button>
           ))}
+
+
           <button
             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}

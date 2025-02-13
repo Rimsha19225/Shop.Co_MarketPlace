@@ -13,7 +13,7 @@ import Gplay from "../../public/images/G Pay.png"
 
 const Footer = () => {
   return (
-    <div className="bg-[#F0F0F0] w-[100%] h-auto pt-20">
+    <div className="bg-[#F0F0F0] w-[100%] h-auto pt-20 mt-20">
       <div className="relative w-[90%] md:w-[87%] sm:w-[100%] mx-auto h-auto pb-7 md:pb-5 pt-5 bg-[#000000] rounded-2xl sm:ml-[4.3rem] md:ml-[6.3rem] flex flex-col sm:flex-row md:flex-row items-center pl-0 md:pl-16 mt-[-12rem] md:mt-[-9rem]">
         <div className="integral text-white text-[30px] sm:text-[31px] md:text-[32px] pt-4 sm:pt-2 md:pt-0 w-[80%] sm:w-[50%] md:w-[35%] font-bold leading-none">STAY UPTO DATE ABOUT OUR LATEST OFFERS</div>
         <div className="pt-[1rem] md:pt-[0rem]">

@@ -1,6 +1,5 @@
 import React from 'react'
 import ViewReview from "../../components/viewReview"
-import Footer from "@/components/footer"
 
 const AllReviewDetail = () => {
   return (
@@ -11,7 +10,6 @@ const AllReviewDetail = () => {
           <ViewReview limit={1000} page={0} />
         </div>
       </div>
-        <Footer />
     </div>
   )
 }

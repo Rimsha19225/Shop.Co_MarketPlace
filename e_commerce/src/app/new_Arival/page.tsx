@@ -18,7 +18,6 @@ import image1 from '../../../public/images/image1.png'
 import image2 from '../../../public/images/image2.png'
 import image3 from '../../../public/images/image3.png'
 import image4 from '../../../public/images/image4.png'
-import Footer from "@/components/footer"
 import Link from "next/link"
 import CustomerReviewSlider from "@/components/customerReviewSlider"
 
@@ -157,7 +156,6 @@ const New_Arival = () => {
     <div>
       <CustomerReviewSlider />
     </div>
-    <Footer/>
     </div>
   )
 }
