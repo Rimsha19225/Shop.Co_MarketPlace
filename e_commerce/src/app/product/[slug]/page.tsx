@@ -24,9 +24,7 @@ const ProductPage = () => {
   
   const fetchProduct = async (slugValue: string) => {
     try {
-      console.log("Fetching product for slug:", slugValue);
       const decodedSlug = decodeURIComponent(slugValue);
-      console.log("Decoded Slug:", decodedSlug);
   
       const fetchedProduct: Product = await client.fetch(
         groq`*[_type == "products" && slug.current == $slug][0]{
@@ -46,7 +44,6 @@ const ProductPage = () => {
         { slug: decodedSlug }
       );
   
-      console.log("Fetched product:", fetchedProduct);
       setProduct(fetchedProduct);
     } catch (error) {
       console.error("Error fetching product:", error);
@@ -94,8 +91,6 @@ const ProductPage = () => {
     <div className="container mx-auto mt-36">
       <div className="w-full flex gap-8 p-4">
       {product?.image && (
-        <>
-          {console.log("Product Image URL:", urlFor(product.image).url())}
           <Image
             src={urlFor(product.image).url()}
             alt={product?.name || "Product Image"}
@@ -103,7 +98,6 @@ const ProductPage = () => {
             height={200}
             className="rounded-lg w-[30rem] h-[32rem] object-cover"
           />
-        </>
       )}
         <div>
           <h2 className="integral text-[2.3rem] font-semibold">{product?.name}</h2>
