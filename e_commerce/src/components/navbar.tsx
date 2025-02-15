@@ -21,7 +21,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbody w-full bg-[#ffffff] fixed top-[30px] sm:top-[38px] md:top-[38px] pb-[0.5rem] border-b-[1px] z-40">
+    <div className="navbody w-full bg-[#ffffff] fixed top-[30px] sm:top-[38px] md:top-[38px] pb-[0.5rem] border-b-[1px] z-10">
       <div className="w-[90%] h-[5rem] 2xl:w-[1500px] mx-auto flex justify-around items-center">
         <Link href={"/"}>
           <div className='integral pl-2 md:pl-0 font-bold text-[25px] sm:text-[30px] md:text-[32px] w-20 cursor-pointer'>
