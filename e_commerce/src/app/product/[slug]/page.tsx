@@ -88,19 +88,19 @@ const ProductPage = () => {
 
 
   return (
-    <div className="container mx-auto mt-36">
-      <div className="w-full flex gap-8 p-4">
+    <div className="container mx-auto mt-32 md:mt-36 mb-48 md:mb-60">
+      <div className="w-full flex flex-col md:flex-row gap-8 p-4">
       {product?.image && (
   <Image
     src={urlFor(product.image).url()}
     alt={product?.name || "Product Image"}
     width={200}
     height={200}
-    className="rounded-lg w-[30rem] h-[32rem] object-cover"
+    className="rounded-lg w-[100%] md:w-[30rem] md:h-[32rem] object-cover"
   />
 )}
         <div>
-          <h2 className="integral text-[2.3rem] font-semibold">{product?.name}</h2>
+          <h2 className="integral text-[1.2rem] md:text-[2.3rem] font-semibold">{product?.name}</h2>
           {renderStars(product?.rating)}
           <p className="text-gray-700 mt-2">{product?.description}</p>
           <hr className="w-full mt-3" />

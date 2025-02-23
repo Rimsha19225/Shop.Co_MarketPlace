@@ -43,7 +43,7 @@ const ReviewComponent = () => {
   
 
   return (
-    <div className="mt-40 mb-40 p-4 bg-white rounded-lg shadow-md w-full max-w-[50rem] mx-auto">
+    <div className="mt-32 md:mt-40 mb-40 p-4 bg-white rounded-lg shadow-md w-full max-w-[50rem] mx-auto">
       <h2 className="text-xl font-semibold mb-4">Customer Reviews</h2>
       <div>
         {reviews.map((review) => (

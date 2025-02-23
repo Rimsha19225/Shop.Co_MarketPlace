@@ -2,6 +2,7 @@
 
 export interface Product {
     _id : string;
+    _key : string;
     name : string;
     _type : "products";
     image? : {

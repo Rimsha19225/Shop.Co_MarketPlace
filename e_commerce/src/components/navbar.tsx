@@ -21,10 +21,13 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbody w-full bg-[#ffffff] fixed top-[30px] sm:top-[38px] md:top-[38px] pb-[0.5rem] border-b-[1px] z-10">
-      <div className="w-[90%] h-[5rem] 2xl:w-[1500px] mx-auto flex justify-around items-center">
+    <div className="navbody w-full bg-white fixed top-[30px] sm:top-[38px] md:top-[38px] pb-[0.5rem] border-b-[1px] z-[100] shadow-md">
+      <div className="w-[95%] h-[5rem] 2xl:w-[1500px] mx-auto flex justify-around items-center">
+      <div className="mt-[1rem] sm:mt-[2.5rem] sm:ml-[2rem] md:hidden cursor-pointer" onClick={toggleMenu}>
+        <Image src={menuOpen ? menuIcon : menuIcon} alt="menu toggle" className='w-8 h-8 bg-white mb-2' />
+      </div>
         <Link href={"/"}>
-          <div className='integral pl-2 md:pl-0 font-bold text-[25px] sm:text-[30px] md:text-[32px] w-20 cursor-pointer'>
+          <div className='integral md:pl-0 font-bold text-[25px] sm:text-[30px] md:text-[32px] cursor-pointer'>
             SHOP.CO
           </div>
         </Link>
@@ -65,19 +68,16 @@ const NavBar = () => {
           <Link href={"#"}><Image src={profile} alt="cross" className='cursor-pointer'/></Link>
         </div>
       </div>
-      <div className="ml-10 mt-[1.4rem] sm:mt-[2.5rem] sm:ml-[2rem] mb-[2rem] md:hidden cursor-pointer" onClick={toggleMenu}>
-        <Image src={menuOpen ? menuIcon : menuIcon} alt="menu toggle" className='w-10 h-8 bg-white' />
-      </div>
       {menuOpen && (
-        <div className="absolute sm:hidden top-20 right-[0.01rem] w-screen h-screen bg-gray-400 text-black flex flex-col items-center gap-4 py-3 rounded opaci">
-          <div className='satoshi w-[15rem] gap-[10rem] mt-[1rem] mr-[10rem]'>
-            <div className="link flex gap-1 hover:font-semibold p-2 m-2 rounded hover:text-white">
-              <Link href={"#"} onClick={toggleMenu} className="satoshi font-semibold dropdown-button border-none cursor-pointer border-r-[5px]">Shop</Link>
+        <div className="absolute sm:hidden top-[5.5rem] mx-2 w-[50%] h-auto bg-black text-white flex flex-col items-center gap-4 py-3 rounded opaci">
+          <div className='satoshi w-[15rem] px-10 gap-[10rem] mt-[0.2rem]'>
+            <div className="link flex gap-1 hover:font-semibold p-2 m-2">
+              <Link href={"/category"} onClick={toggleMenu} className="satoshi font-semibold dropdown-button border-none cursor-pointer border-r-[5px]">Shop</Link>
               <div className='mt-2'><Image src={dropdown} alt="drop"/></div>
             </div>
-            <div className='p-2 m-2 rounded hover:text-white'><Link href={"#"} onClick={toggleMenu} className='satoshi link font-semibold'>On Sale</Link></div>
-            <div className='p-2 m-2 rounded hover:text-white'><Link href={"/new_Arival"} onClick={toggleMenu} className='satoshi link font-semibold'>New Arrivals</Link></div>
-            <div className='p-2 m-2 rounded hover:text-white'><Link href={"#"} onClick={toggleMenu} className='satoshi link font-semibold'>Brands</Link></div>
+            <div className='p-2 m-2'><Link href={"#"} onClick={toggleMenu} className='satoshi link font-semibold'>On Sale</Link></div>
+            <div className='p-2 m-2'><Link href={"/new_Arival"} onClick={toggleMenu} className='satoshi link font-semibold'>New Arrivals</Link></div>
+            <div className='p-2 m-2'><Link href={"#"} onClick={toggleMenu} className='satoshi link font-semibold'>Brands</Link></div>
           </div>
         </div>
       )}

@@ -75,7 +75,7 @@ const ShopProduct = () => {
 
   return (
     <div className="p-4">
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grd-col-1 md:grid-cols-3 gap-8">
         {currentProducts.map((product) => (
           <div key={product._id} className="card p-4 border rounded-lg bg-white shadow-md">
             <Link href={`/product/${product.slug.current}`}>

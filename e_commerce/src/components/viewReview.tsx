@@ -63,7 +63,7 @@ const ViewReview: React.FC<ViewReviewProps> = ({limit = Infinity , page = 0 }) =
   };
 
   return (
-    <div className="grid w-full grid-cols-2 gap-5">
+    <div className="grid w-full grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
       {reviews.length > 0 ? (
         reviews.map((review) => (
           <div key={review._id} className="card p-8 border mb-2 rounded-xl hover:bg-[#efeeee]">

@@ -94,43 +94,43 @@ const CartPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="bg-white shadow-md rounded-2xl p-4">
+    <div className="container mx-auto p-0 md:p-4">
+      <div className="bg-white shadow-md rounded-2xl w-[100%] p-2 md:p-4">
         {cartItems.length > 0 ? (
           <>
-            <div className="flex w-[100%] justify-between gap-10 p-4">
-              <div className="w-[50%]">
+            <div className="flex flex-col md:flex-row w-[100%] justify-between gap-2 md:gap-10 md:p-4">
+              <div className="md:w-[50%]">
                 {cartItems.map((item) => (
                   <div
                     key={item._id}
-                    className="card flex gap-32 m-3 hover:bg-gray-100 rounded-xl items-center justify-between border-b p-4"
+                    className="md:card flex flex-col md:flex-row gap-4 mb-2 md:mb-0 md:gap-32 md:m-3 hover:bg-gray-100 rounded-xl items-center justify-between border-b md:p-4"
                   >
-                    <div className="flex items-center">
-                      <div className="flex items-center">
+                    <div className="flex mb-2 md:mb-0 items-center px-2 md:px-0">
+                      <div className="flex items-center mt-2 md:mt-0 gap-2 md:gap-0 p-1 md:p-0">
                         {item.image && (
                           <Image
                             src={urlFor(item.image).url()}
                             alt="images"
-                            className="w-28 h-28 object-cover rounded-md"
+                            className="w-24 md:w-28 h-24 md:h-28 object-cover rounded-md"
                             width={500}
                             height={500}
                           />
                         )}
-                        <div className="ml-4">
-                          <h2 className="text-lg font-semibold">{item.name}</h2>
-                          <p className="text-gray-500 hover:text-gray-400">
+                        <div className="md:ml-4">
+                          <h2 className="text-[0.7rem] md:text-lg font-semibold">{item.name}</h2>
+                          <p className="text-[0.7rem] md:text-[1rem] text-gray-500 hover:text-gray-400">
                             {item.sizes}
                           </p>
-                          <p className="text-gray-600 hover:text-gray-400">
+                          <p className="text-[0.7rem] md:text-[1rem] text-gray-600 hover:text-gray-400">
                             ${item.price}
                           </p>
-                          <p className="text-gray-600 hover:text-gray-400">
+                          <p className="text-[0.7rem] md:text-[1rem] text-gray-600 hover:text-gray-400">
                             {item.colors}
                           </p>
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-4 items-center">
+                    <div className="flex flex-col mb-2 md:mb-0 gap-2 md:gap-4 items-center">
                       <div className="flex items-center">
                         <button
                           className="card px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md hover:font-bold"
@@ -156,7 +156,7 @@ const CartPage = () => {
                   </div>
                 ))}
               </div>
-              <div className="w-[50%] flex flex-col p-4">
+              <div className="w-[100%] md:w-[50%] flex flex-col p-0 md:p-4">
                 <h2 className="text-black font-bold text-[1.6rem] text-start mb-2">
                   Order Summary
                 </h2>

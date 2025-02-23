@@ -88,10 +88,20 @@ const CheckoutPage = () => {
   useEffect(() => {
     const storedCart = localStorage.getItem("cartItems");
     if (storedCart) {
-      setCartItems(JSON.parse(storedCart));
+      const cartItems: Product[] = JSON.parse(storedCart);
+      const updatedCartItems = cartItems.map((item: Product) => ({
+        ...item,
+        _key: item._key || generateUniqueKey(), // Ensure each item has a _key
+      }));
+      
+      setCartItems(updatedCartItems);
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems)); // Save updated keys
     }
   }, []);
-
+  
+  const generateUniqueKey = (): string => {
+    return Math.random().toString(36).slice(2, 11); // Use slice instead of substr
+  };
   const calculatedTotal = () => {
     const subtotal = cartItems.reduce(
       (total, item) => total + item.price * item.inventory,
@@ -139,57 +149,44 @@ const CheckoutPage = () => {
 
 
   const handlePlaceOrder = async () => {
-    Swal.fire({
-      title: "Processing your order...",
-      text: "Please wait a moment.",
-      icon: "info",
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: "proceed",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        if (validateForm()) {
-          localStorage.removeItem("appliedDiscount");
-          Swal.fire(
-            "Order Placed!",
-            "Your order has been placed successfully.",
-            "success"
-          );
-        } else {
-          Swal.fire("Error!", "Please fill all required fields.", "error");
-        }
+    if (validateForm()) {
+      const orderData = {
+        _type: "order",
+        firstName: formValues.firstName,
+        lastName: formValues.lastName,
+        address: formValues.address,
+        addressLine2: formValues.addressLine2,
+        city: formValues.city,
+        zipCode: formValues.zipCode,
+        phone: formValues.phone,
+        email: formValues.email,
+        country: formValues.country,
+        cartItems: cartItems.map((item) => ({
+          _type: "reference",
+          _ref: item._id,
+          _key: item._key || generateUniqueKey(),
+        })),
+        total: calculatedTotal().total,
+        orderDate: new Date().toISOString(),
+      };
+  
+      try {
+        await client.create(orderData);
+        localStorage.removeItem("appliedDiscount");
+        Swal.fire("Order Placed!", "Your order has been placed successfully.", "success");
+      } catch (error) {
+        console.error("Failed to place order", error);
+        Swal.fire("Error!", "Failed to place order.", "error");
       }
-    });
-    const orderData ={
-      _type: "order",
-      firstName: formValues.firstName,
-      lastName: formValues.lastName,
-      address: formValues.address,
-      addressLine2: formValues.addressLine2,
-      city: formValues.city,
-      zipCode: formValues.zipCode,
-      phone: formValues.phone,
-      email: formValues.email,
-      country: formValues.country,
-      cartItems: cartItems.map((item) => ({
-        _type: "reference",
-        _ref: item._id,
-      })),
-      total: calculatedTotal().total,
-      orderDate: new Date().toISOString(),
-    }
-    try {
-      await client.create(orderData);
-      localStorage.removeItem("appliedDiscount");
-    } catch (error) {
-      console.error("Failed to place order", error);
+    } else {
+      Swal.fire("Error!", "Please fill all required fields.", "error");
     }
   };
+  
 
   return (
     <div className="w-full min-h-screen bg-grey-50">
-      <div className="mt-6">
+      <div className="mt-0 md:mt-6">
         <div className="max-w-[82rem] m-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center gap-2 py-4">
             <Link
@@ -203,12 +200,15 @@ const CheckoutPage = () => {
           </nav>
         </div>
       </div>
-      <h2 className="integral max-w-[82rem] m-auto sm:px-6 lg:px-8 text-[1.8rem] font-semibold mt-3">
+      <h2 className="hidden md:block integral max-w-[82rem] m-auto px-3 md:px-6 lg:px-8 text-[1.8rem] font-semibold mt-1 md:mt-3">
         Order Summary
       </h2>
-      <div className="max-w-[82rem] mx-auto px-4 mt-[-2rem] sm:px-6 lg:px-8 py-12">
+      <div className="max-w-[82rem] mx-auto px-3 md:px-4 mt-[-2rem] sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="bg-white rounded-lg p-6 space-y-6">
+          <div className="order-2 md:order-1 bg-white rounded-lg p-3 md:p-6 space-y-6">
+          <h2 className="block md:hiddenintegral max-w-[82rem] m-auto px-1 md:px-6 lg:px-8 text-[1.8rem] font-semibold mt-1 md:mt-3">
+        Order Summary
+      </h2>
             {cartItems.length > 0 ? (
               cartItems.map((item) => (
                 <div
@@ -258,12 +258,12 @@ const CheckoutPage = () => {
               </div>
             </div>
           </div>
-          <div>
+          <div className="order-1 md:order-2">
             <h2 className="satoshi1 text-[1.5rem] font-semibold mb-4">
               Billing Information
             </h2>
             <div className="flex flex-col px-2 gap-2 font-semibold">
-              <div className="flex flex-col px-2 gap-2 font-semibold">
+              <div className="flex flex-col px-0 md:px-2 gap-2 font-semibold">
                 <label className="text-[1rem] text-gray-700 mt-2">
                   First Name
                 </label>
@@ -277,7 +277,7 @@ const CheckoutPage = () => {
                 />
                 {formErrors.firstName && <p className="text-red-500">First Name is Required!</p>}
               </div>
-              <div className="flex flex-col px-2 gap-2 font-semibold">
+              <div className="flex flex-col px-0 md:px-2 gap-2 font-semibold">
                 <label className="text-[1rem] text-gray-700 mt-4">
                   Last Name
                 </label>
@@ -291,7 +291,7 @@ const CheckoutPage = () => {
                 />
                 {formErrors.lastName && <p className="text-red-500">Last Name is Required!</p>}
               </div>
-              <div className="flex flex-col px-2 gap-2 font-semibold">
+              <div className="flex flex-col px-0 md:px-2 gap-2 font-semibold">
                 <label className="text-[1rem] text-gray-700 mt-4">
                   Email Address
                 </label>
@@ -305,7 +305,7 @@ const CheckoutPage = () => {
                 />
                 {formErrors.email && <p className="text-red-500">Email is Required!</p>}
               </div>
-              <div className="flex flex-col px-2 gap-2 font-semibold">
+              <div className="flex flex-col px-0 md:px-2 gap-2 font-semibold">
                 <label className="text-[1rem] text-gray-700 mt-4">
                   Address
                 </label>
@@ -321,7 +321,7 @@ const CheckoutPage = () => {
                 </div>
                 {formErrors.address && <p className="text-red-500">Address is Required!</p>}
               </div>
-              <div className="px-2 font-semibold">
+              <div className="px-0 md:px-2 font-semibold">
                 <div className="flex flex-col gap-2 w-full">
                   <input
                     type="text"
@@ -333,7 +333,7 @@ const CheckoutPage = () => {
                   />
                 </div>
               </div>
-              <div className="flex flex-col px-2 gap-2 font-semibold">
+              <div className="flex flex-col px-0 md:px-2 gap-2 font-semibold">
                 <label className="text-[1rem] text-gray-700 mt-4">
                   Zip Code
                 </label>
@@ -347,7 +347,7 @@ const CheckoutPage = () => {
                 />
                 {formErrors.zipCode && <p className="text-red-500">Zip Code is Required!</p>}
               </div>
-              <div className="flex flex-col px-2 gap-2 font-semibold">
+              <div className="flex flex-col px-0 md:px-2 gap-2 font-semibold">
                 <label className="text-[1rem] text-gray-700 mt-4">
                   Phone Number
                 </label>
@@ -377,7 +377,7 @@ const CheckoutPage = () => {
               </select>
               {formErrors.country && <p className="text-red-500">Country is Required!</p>}
             </div>
-            <div className="flex flex-col px-2 gap-2 font-semibold">
+            <div className="flex flex-col px-0 md:px-2 gap-2 font-semibold">
               <label className="text-[1rem] text-gray-700 mt-4">City</label>
               <select
                 id="city"
@@ -399,7 +399,7 @@ const CheckoutPage = () => {
             </div>
             <button
               onClick={handlePlaceOrder}
-              className="mt-8 w-full bg-black text-white py-4 rounded-full card"
+              className="mt-8 w-full bg-black text-white py-4 rounded-full md:card"
             >
               Place Order
             </button>
