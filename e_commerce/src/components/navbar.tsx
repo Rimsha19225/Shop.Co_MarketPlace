@@ -65,7 +65,7 @@ const NavBar = () => {
             </div>
           )}
           <Link href={"/cart"}><Image src={cart} alt="cross" className='cursor-pointer'/></Link>
-          <Link href={"#"}><Image src={profile} alt="cross" className='cursor-pointer'/></Link>
+          <Link href={"/login"}><Image src={profile} alt="cross" className='cursor-pointer'/></Link>
         </div>
       </div>
       {menuOpen && (
